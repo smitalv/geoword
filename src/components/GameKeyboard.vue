@@ -21,8 +21,6 @@ export default {
       buttons: Array,
     },
     components: { KeyboardButton },
-    data: function() {
-    },
     methods: {
       pressButton(button) {
         if (button.type === 'done') {
@@ -40,8 +38,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .button-row {
-    display: inline-flex;
+    display: flex;
     justify-content: space-around;
     width: 100%;
+    font-size: 24px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .button-row {
+      max-width: 600px;
+      margin-left:auto;
+      margin-right:auto;
+    }
   }
 </style>

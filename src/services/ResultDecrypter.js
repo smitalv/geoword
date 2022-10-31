@@ -15,6 +15,12 @@ export default new class {
       }
     });
 
-    return areAllCorrect ? CryptoJS.AES.decrypt('U2FsdGVkX18rgAgNuS4SFWnX+XjNTFvtMQXlCvP7MWhvH8wpL0K2mJWYUO173YP5', 'BRIDGE').toString(CryptoJS.enc.Utf8) : null;
+    if (areAllCorrect) {
+      let hash = new URLSearchParams(window.location.search).get('h');
+
+      return CryptoJS.AES.decrypt(hash, lines[lines.length - 1]).toString(CryptoJS.enc.Utf8);
+    }
+
+    return null;
   }
  } 

@@ -23,12 +23,13 @@ export default {
 
 <style scoped>
   .box {
-    flex-grow: 1;
-    height: 30px;
-    max-width: 25px;
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    min-height: 40px;
     margin: 0 3px 0 3px;
     border: solid;
     border-width: 2px;
+    vertical-align: middle;
   }
 
   .box-correct {

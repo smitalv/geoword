@@ -1,30 +1,31 @@
 <template>
-  <div>
-    <GameLine 
-    v-for="(line, index) in getLinesForUser()"
-    :key="index"
-    :index="index"
-    v-bind="line"
-  />
-  </div>
-  <div class="bottom">
-    <GameKeyboard
-      v-if="!decryptedResult"
-      :buttons="resolveButtonsForKeyboard()"
-      @add-char="(char) => addChar(char)"
-      @del-char="delChar()"
-      @submit-line="submitLine()"
+  <div v-if="isStarted()">
+    <div>
+      <GameLine 
+      v-for="(line, index) in getLinesForUser()"
+      :key="index"
+      :index="index"
+      v-bind="line"
     />
-    <div 
-      v-else
-      >
-      <textarea
-        class="textarea-result"
-        v-model="decryptedResult"
-      >
-      </textarea>
+    </div>
+    <div class="bottom">
+      <GameKeyboard
+        v-if="!decryptedResult"
+        :buttons="resolveButtonsForKeyboard()"
+        @add-char="(char) => addChar(char)"
+        @del-char="delChar()"
+        @submit-line="submitLine()"
+      />
+      <div 
+        v-else
+        >
+        <GameResult
+          :decryptedResult="decryptedResult"
+        />
+      </div>
     </div>
   </div>
+  <WordGenerator v-else />
 </template>
 
 <script>
@@ -37,17 +38,23 @@ import ButtonsForKeyboardResolver from './services/ButtonsForKeyboardResolver';
 import LinesForUserResolver from './services/LinesForUserResolver';
 import LetterHashesResolver from './services/LetterHashesResolver';
 import LineSubmitter from './services/LineSubmitter';
+import GameResult from './components/GameResult.vue';
+import WordGenerator from './components/WordGenerator.vue';
 
 export default {
   name: 'App',
   components: {
     GameLine,
-    GameKeyboard
-  },
+    GameKeyboard,
+    GameResult,
+    WordGenerator
+},
   created() {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Backspace') {
-        this.delChar();
+        if (this.decryptedResult === null) {
+          this.delChar();
+        }
         
         return;
       } else if (e.key === 'Enter') {
@@ -85,6 +92,9 @@ export default {
     },
     resolveButtonsForKeyboard() {
       return ButtonsForKeyboardResolver.resolveButtons(this.charsCorrect, this.charsWarning);
+    },
+    isStarted() {
+      return LetterHashesResolver.resolveHashes().length > 0;
     }
   },
 }
@@ -105,14 +115,5 @@ export default {
   left: 5px;
   right: 5px;
   bottom: 5px;
-  margin-left:auto;
-  margin-right:auto;
-  max-width: 500px;
-}
-
-.textarea-result {
-  resize: none;
-  width: 100%;
-  height: 100%;
 }
 </style>

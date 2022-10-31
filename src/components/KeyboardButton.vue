@@ -25,12 +25,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .button {
-    flex-grow: 1;
+    flex: 1;
     margin: 1px 1px 1px 1px;
     padding: 10px 0 10px 0;
     border: solid;
     border-width: 2px;
-    width: 25px;
   }
 
   .button-correct {

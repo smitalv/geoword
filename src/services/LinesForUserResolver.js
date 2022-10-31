@@ -30,7 +30,7 @@ export default new class {
               {
                 char: letters[i],
                 correct: isCorrect,
-                warning: isCorrect ? false : CharacterChecker.isCharWarning(letters[i], letterHashes, charsWarning),
+                warning: isCorrect ? false : CharacterChecker.isCharWarning(letters[i], i, letterHashes, letters, charsWarning),
               });
           } else {
             newLine.letters.push(
@@ -41,6 +41,8 @@ export default new class {
               })
             }
           }
+
+        
 
         newLines.push(newLine);
       }

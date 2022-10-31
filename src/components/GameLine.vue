@@ -34,9 +34,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .line {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     width: 100%;
     margin-bottom: 10px;
+    font-size: 36px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .line {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 600px;
+    }
   }
 </style>
