@@ -6,7 +6,7 @@ export default new class {
 
       for (
           let i = lines.length - 1; 
-          i >= 0 && i >= lines.length - 4; 
+          i >= 0 && i >= lines.length - 3; 
           i--
         ) {
         let line = lines[i];

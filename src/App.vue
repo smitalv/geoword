@@ -1,6 +1,6 @@
 <template>
   <div v-if="isStarted()">
-    <div>
+    <div class="block-lines">
       <GameLine 
       v-for="(line, index) in getLinesForUser()"
       :key="index"
@@ -110,10 +110,16 @@ export default {
   margin-top: 20px;
 }
 
-.bottom {
-  position: absolute;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
+.block-lines {
+  height: 365px;
+}
+
+@media only screen and (min-height: 570px) {
+    .bottom {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    }
 }
 </style>
